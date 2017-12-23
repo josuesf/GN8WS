@@ -67,8 +67,12 @@ module.exports = {
                 return res.json({ res: 'error', detail: err });
             return res.json({ res: 'ok', user: user });
         })
-    }
-
+    },
+    /*validarLogeo: function (req, res){
+        if(req.session.me != null)
+            return res.redirect('/home')
+        return res.redirect('/')
+    }*/
 
 };
 
