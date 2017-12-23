@@ -34,7 +34,11 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+
+  'post /ws/signup': 'UsersController.signup_ws',
+  'post /ws/isuser': 'UsersController.is_user_ws',
+  //'post /signup': 'UsersController.signup_ws',
 
   /***************************************************************************
   *                                                                          *
