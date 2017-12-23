@@ -21,7 +21,7 @@
                 <div class = 'row'>
                     <div class = 'signup-box'>
                         <h1 class = 'platzigram'>Signin</h1>
-                        <form class = 'signup-form'>
+                        <form class = 'signup-form' action='/signin' method="POST">
                             <div class = 'section'>
                                 <a class = 'btn btn-fb hide-on-small-only'>Signin with Facebook</a>
                                 <a class = 'btn btn-fb hide-on-med-and-up'><i class="fa fa-facebook-official"></i> Signup</a>
@@ -29,7 +29,7 @@
                             <div class = 'divider'>
                             </div>
                             <div class = 'section'>
-                                <input type = 'text' name = 'username' placeholder = "Username"/>
+                                <input type = 'text' name = 'email' placeholder = "Email"/>
                                 <input type = 'password' name = 'password' placeholder = "Password"/>
                                 <button class = 'btn waves-effect waves-ligth btn-signup'  type = 'submit'>Signin</button>
                             </div>

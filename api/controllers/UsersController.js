@@ -10,7 +10,7 @@ module.exports = {
     signup_ws: function (req, res) {
 
         // Attempt to signup a user using the provided parameters
-        Users.signup({
+        Users.signup_ws({
             name: req.param('name'),
             email: req.param('email'),
             username: req.param('username'),
@@ -32,6 +32,31 @@ module.exports = {
                 return res.json({ res: 'error', detail: err });
             return res.json({ res: 'ok', user: user });
         });
+    },
+    signup: function (req, res){
+        Users.signup({
+            name: req.param('name'),
+            email: req.param('email'),
+            username: req.param('username'),
+            password: req.param('password')
+        }, function (err, user) {
+            if(err)
+                return res.negotiate(err)
+            req.session.me=user.id
+            return res.redirect('/')
+        })
+    },
+
+    signin: function (req, res){
+        Users.signin({
+            email: req.param('email'),
+            password: req.param('password')
+        }, function (err , user){
+            if(err || user == null)
+                return res.negotiate(err)
+            req.session.me=user.id
+            return res.redirect('/home')
+        })
     }
 
 

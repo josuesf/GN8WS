@@ -44,7 +44,7 @@ module.exports = {
    * @param  {Function} cb
    */
 
-  signup: function (inputs, cb) {
+  signup_ws: function (inputs, cb) {
     // Create a user
     Users.create({
       name: inputs.name,
@@ -68,12 +68,44 @@ module.exports = {
    * @param  {Function} cb
    */
 
+  signup: function (inputs, cb) {
+    // Create a user
+    Users.create({
+      name: inputs.name,
+      email: inputs.email,
+      username:inputs.username,
+      // TODO: But encrypt the password first
+      password: inputs.password,
+      photo_url:'sin_imagen',
+    })
+    .exec(cb);
+  },
+  /**
+   * Create a new user using the provided inputs,
+   * but encrypt the password first.
+   *
+   * @param  {Object}   inputs
+   *                     • name     {String}
+   *                     • email    {String}
+   *                     • user     {String}
+   *                     • password {String}
+   * @param  {Function} cb
+   */
+
   isuser: function (inputs, cb) {
     // Create a user
     Users.findOne({
       email: inputs.email,
     })
     .exec(cb);
+  },
+
+  signin: function (inputs, cb){
+    Users.findOne({
+      email: inputs.email,
+      password: inputs.password
+    })
+    .exec(cb)
   },
   
   connection:'mongodb'
