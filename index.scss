@@ -1,5 +1,6 @@
 //pisamos el color secundario del materialize
-$secondary-color: #9575CD;
+$primary-color: #9575CD;
+$secondary-color: #3B5998;
 //importamos el archivo de materialize escrito en sass
 @import "node_modules/materialize-css/sass/materialize.scss";
 
@@ -32,7 +33,7 @@ body {
 .platzigram {
     font-family: 'Montserrat';
     font-size: 42px;
-    color: $secondary-color !important;
+    color: $primary-color !important;
 }
 
 .signup-form {
@@ -44,12 +45,10 @@ body {
     color: #a5a7aa;
     font-size: 1.2em;
 }
-
 .signup-form .btn.btn-fb {
-    background-color: #4090db;
+    background-color: #4090db ;
     font-size: .9em;
 }
-
 .signup-form .btn.btn-fb:hover {
     background-color:#3B5998;
 }
@@ -147,10 +146,10 @@ $avatar-size: 48px;
 }
 
 .btn-lang{
-    background: #4090db;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .btn-lang:hover{
-    background: #3B5998;
+    background: #bdc3c7;
 }

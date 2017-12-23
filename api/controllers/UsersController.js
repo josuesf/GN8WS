@@ -71,6 +71,7 @@ module.exports = {
             return res.json({ res: 'ok', user: user });
         })
     },
+<<<<<<< HEAD
 
     load_picture: function (req, res) {
         var config = {aws:{
@@ -103,6 +104,13 @@ module.exports = {
         })
     }
 
+=======
+    /*validarLogeo: function (req, res){
+        if(req.session.me != null)
+            return res.redirect('/home')
+        return res.redirect('/')
+    }*/
+>>>>>>> 5bb74b840206b07313d27acd3bb163061f11de18
 
 };
 
