@@ -19,6 +19,7 @@
     "grunt-sails-linker": "~0.10.1",
     "grunt-sync": "0.5.2",
     "include-all": "^1.0.0",
+    "materialize-css": "^0.100.2",
     "rc": "1.0.1",
     "sails": "~0.12.14",
     "sails-disk": "~0.10.9",
@@ -26,7 +27,7 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "gulp | sails lift"
   },
   "main": "app.js",
   "repository": {
@@ -34,5 +35,10 @@
     "url": "git://github.com/josuesf/GN8Server.git"
   },
   "author": "josuesf",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0"
+  }
 }
