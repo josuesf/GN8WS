@@ -40,6 +40,7 @@ module.exports.routes = {
   'post /ws/isuser': 'UsersController.is_user_ws',
   'post /signup': 'UsersController.signup',
   'post /signin': 'UsersController.signin',
+  'post /upload_photo': 'UsersController.uploadFile',
   'post /ws/signin': 'UsersController.signin_ws',
   //'post /signup': 'UsersController.signup_ws',
   '/signin':{

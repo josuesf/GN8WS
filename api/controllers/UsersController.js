@@ -4,9 +4,6 @@
  * @description :: Server-side logic for managing users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-var multer = require('multer')
-var aws = require('aws-sdk')
-var multerS3 = require('multer-s3')
 
 module.exports = {
 
@@ -71,46 +68,35 @@ module.exports = {
             return res.json({ res: 'ok', user: user });
         })
     },
-<<<<<<< HEAD
 
-    load_picture: function (req, res) {
-        var config = {aws:{
-            accessKey:"AKIAJ6EPZIP4ECYBJEPA",
-            secretKey:"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"
-        }}
+    uploadFile: function (req, res) {
+        req.file('picture').upload({
+            adapter: require('skipper-better-s3')
+            , key: 'AKIAIHQ5O7BDIQ733FLA'
+            , secret: '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'
+            , bucket: 'gn8images' // Optional - default is 'us-standard' 
+            // Let's use the custom s3params to upload this file as publicly 
+            // readable by anyone 
+            , s3params:
+                { ACL: 'public-read' }
+        }, function (err, filesUploaded) {
+            if (err) return res.negotiate(err);
 
-        var s3 = new aws.S3({
-            accessKeyId: config.aws.accessKey,
-            secretAccessKey: config.aws.secretKey
-        })
-        var storage = multerS3({
-            s3: s3,
-            bucket: 'gn8images',
-            acl: 'public-read',
-            metadata: function (req, file, cb) {
-                cb(null, { fieldName: file.fieldname })
-            },
-            key: function (req, file, cb) {
-                cb(null, file.originalname)
-            }
-        })
-        var upload = multer({ storage: storage }).single('picture')
+            Users.setPhoto({
+                id:req.session.me,
+                photo_url: filesUploaded[0].extra.Location
+            }, function (err, user) {
+                if (err) return res.negotiate(err);
 
-        upload(req, res, function (err,result){
-            if(err){
-                return res.send(500, 'Error uploading file')
-            }
-            res.send(result)
-        })
+                return res.ok({
+                    files: filesUploaded,
+                    textParams: user
+                });
+            })
+
+        });
     }
 
-=======
-    /*validarLogeo: function (req, res){
-        if(req.session.me != null)
-            return res.redirect('/home')
-        return res.redirect('/')
-    }*/
->>>>>>> 5bb74b840206b07313d27acd3bb163061f11de18
 
 };
 
