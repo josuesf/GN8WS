@@ -75,6 +75,26 @@ module.exports = {
     })
     .exec(cb);
   },
+  /**
+   * Create a new user using the provided inputs,
+   * but encrypt the password first.
+   *
+   * @param  {Object}   inputs
+   *                     • name     {String}
+   *                     • email    {String}
+   *                     • user     {String}
+   *                     • password {String}
+   * @param  {Function} cb
+   */
+
+  signin: function (inputs, cb) {
+    // Create a user
+    Users.findOne({
+      email: inputs.email,
+      password:inputs.password
+    })
+    .exec(cb);
+  },
   
   connection:'mongodb'
 };

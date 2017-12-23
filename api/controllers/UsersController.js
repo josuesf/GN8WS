@@ -32,6 +32,16 @@ module.exports = {
                 return res.json({ res: 'error', detail: err });
             return res.json({ res: 'ok', user: user });
         });
+    },
+    signin_ws:function(req,res){
+        Users.signin({
+            email:req.param('email'),
+            password:req.param('password')
+        },function(err,user){
+            if (err || user==null)
+                return res.json({ res: 'error', detail: err });
+            return res.json({ res: 'ok', user: user });
+        })
     }
 
 
