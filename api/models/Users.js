@@ -99,6 +99,7 @@ module.exports = {
     })
     .exec(cb);
   },
+<<<<<<< HEAD
 
   signin: function (inputs, cb){
     Users.findOne({
@@ -106,6 +107,27 @@ module.exports = {
       password: inputs.password
     })
     .exec(cb)
+=======
+  /**
+   * Create a new user using the provided inputs,
+   * but encrypt the password first.
+   *
+   * @param  {Object}   inputs
+   *                     • name     {String}
+   *                     • email    {String}
+   *                     • user     {String}
+   *                     • password {String}
+   * @param  {Function} cb
+   */
+
+  signin: function (inputs, cb) {
+    // Create a user
+    Users.findOne({
+      email: inputs.email,
+      password:inputs.password
+    })
+    .exec(cb);
+>>>>>>> 9df7c8550521cf3a1bd38c3d61282d9a7fdbffeb
   },
   
   connection:'mongodb'

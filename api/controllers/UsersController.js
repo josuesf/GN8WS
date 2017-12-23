@@ -33,6 +33,7 @@ module.exports = {
             return res.json({ res: 'ok', user: user });
         });
     },
+<<<<<<< HEAD
     signup: function (req, res){
         Users.signup({
             name: req.param('name'),
@@ -56,6 +57,16 @@ module.exports = {
                 return res.negotiate(err)
             req.session.me=user.id
             return res.redirect('/home')
+=======
+    signin_ws:function(req,res){
+        Users.signin({
+            email:req.param('email'),
+            password:req.param('password')
+        },function(err,user){
+            if (err || user==null)
+                return res.json({ res: 'error', detail: err });
+            return res.json({ res: 'ok', user: user });
+>>>>>>> 9df7c8550521cf3a1bd38c3d61282d9a7fdbffeb
         })
     }
 
