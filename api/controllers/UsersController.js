@@ -56,6 +56,8 @@ module.exports = {
                 return res.negotiate(err)
             req.session.me=user.id
             return res.redirect('/home')
+        })
+    },
     signin_ws:function(req,res){
         Users.signin({
             email:req.param('email'),
