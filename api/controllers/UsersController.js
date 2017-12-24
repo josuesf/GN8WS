@@ -83,7 +83,7 @@ module.exports = {
             if (err) return res.negotiate(err);
 
             Users.setPhoto({
-                id:req.session.me,
+                id: req.session.me,
                 photo_url: filesUploaded[0].extra.Location
             }, function (err, user) {
                 if (err) return res.negotiate(err);
@@ -95,7 +95,31 @@ module.exports = {
             })
 
         });
-    }
+    },
+    uploadPhotoUser: function (req, res) {
+        req.file('picture').upload({
+            adapter: require('skipper-better-s3')
+            , key: 'AKIAIHQ5O7BDIQ733FLA'
+            , secret: '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'
+            , bucket: 'gn8images' // Optional - default is 'us-standard' 
+            // Let's use the custom s3params to upload this file as publicly 
+            // readable by anyone 
+            , s3params:
+                { ACL: 'public-read' }
+        }, function (err, filesUploaded) {
+            if (err) return res.negotiate(err);
+
+            Users.setPhoto({
+                id: req.param('id'),
+                photo_url: filesUploaded[0].extra.Location
+            }, function (err, user) {
+                if (err || user == null)
+                    return res.json({ res: 'error', detail: err });
+                return res.json({ res: 'ok', user: user });
+            })
+
+        });
+    },
 
 
 };
