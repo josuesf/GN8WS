@@ -1,43 +1,47 @@
+
 <div class="container">
   <div class="row">
-        <div class="col s12 m12 l6">
-            <div class="card horizontal" style="margin-top:0">
-              <div class="container">
-                  <h2 class="platzigram center-align">GN8</h2>
-              </div>
-            </div>
-            <div class="card horizontal">
-              <div class="card-image">
-                <img src="images/invie-acustica.png">
-              </div>
-              <div class="card-stacked">
-                <div class="card-content">
-                  <p>A very good app for you and your friends.</p>
-                </div>  
-              </div>
-            </div>
-          </div>
-            <div class = 'col s12 m12 l6'>
+                <div class="col s12 m6 l6 hide-on-small-only">
+                  <div class="card large hoverable"  style="margin-top:0">
+                    <div class="card-image">
+                      <img src="images/invie-acustica.png">
+                    </div>
+                    <div class="card-content">
+                            <p>A very good app for you and your friends.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#" class="deep-purple-text lighten-2"><b>Get it FREE HERE</b></a>
+                    </div>
+                  </div>
+                </div>
+        
+            <div class = 'col s12 m6 l6'>
                 <div class = 'row'>
-                    <div class = 'signup-box'>
-                        <h1 class = 'platzigram'>Signin</h1>
+                    <div class = 'signup-box hoverable'>
+                        <h1 class = 'platzigram'><%= __('GN8') %></h1>
+                        <p class="hide-on-med-and-up">A very good app for you and your friends.
+                            Get it <a href="https://www.youtube.com/watch?v=Gi7ViNQazqE&t=578s">FREE HERE</a>
+                        </p>
                         <form id='formp' class = 'signup-form' action='/signin' method="POST">
                             <div class = 'section'>
-                                <a class = 'btn btn-fb hide-on-small-only'>Signin with Facebook</a>
-                                <a class = 'btn btn-fb hide-on-med-and-up'><i class="fa fa-facebook-official"></i> Signup</a>
+                                <a class = 'btn btn-fb hide-on-med-and-down'>Signin with Facebook</a>
+                                <a class = 'btn btn-fb hide-on-large-only'><i class="fa fa-facebook-official"></i> Signup</a>
                             </div>
+                            <br>
                             <div class = 'divider'>
                             </div>
                             <div class = 'section'>
                                 <input type = 'text' name = 'email' placeholder = "Email"/>
                                 <input type = 'password' name = 'password' placeholder = "Password"/>
+                                
                                 <button class = 'btn waves-effect waves-ligth btn-signup'  type = 'submit'>Signin</button>
                             </div>
+                            <br>
                         </form>
                     </div>
                 </div> 
                 <div class = 'row'>
-                    <div class = 'login-box'>
+                    <div class = 'login-box hoverable'>
                         Not have an account? <a href = '/signup'>Signup</a>
                     </div>
                 </div>

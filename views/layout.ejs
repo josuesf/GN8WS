@@ -47,14 +47,22 @@
       <div class="row">
           <div class="col s12 l3 center-align"><a href="#" data-activates="dropdown1" class="dropdown-button btn btn-lang">Idioma</a>
           <ul id="dropdown1" class="dropdown-content">
-              <li><a href="#" >Espaniol</a></li>
-              <li><a href="#" >Ingles</a></li>
+              <li><a href="" id="es" onclick="toSpanish">Espaniol</a></li>
+              <li><a href="" id="en" onclick="toEnglish">Ingles</a></li>
           </ul>
           </div>
-          <div class="col s12 l3 push-l6 center-align">© 2017 <%= __('GN8') %></div>
+          <div class="col s12 l3 push-l6 center-align">
+              <p>© 2017 <%= __('GN8') %></p>
+          </div>
       </div>
       </div>
   </footer>
+  <script>
+      en.onclick=function (){
+        alert('Hola')
+        req.setLocale('en')
+      }
+  </script>
 
 
     <!--
