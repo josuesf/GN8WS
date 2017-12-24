@@ -55,7 +55,7 @@ module.exports = {
             if(err || user == null)
                 return res.negotiate(err)
             req.session.me=user.id
-            return res.redirect('/home')
+            return res.view('home',{user:user})
         })
     },
     signin_ws:function(req,res){
