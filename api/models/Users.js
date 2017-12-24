@@ -8,27 +8,26 @@
 module.exports = {
 
   attributes: {
-    name:{
-      type:'string',
-      required:true,
+    name: {
+      type: 'string',
+      required: true,
     },
-    email:{
-      type:'email',
-      required:true,
-      unique:true,
+    email: {
+      type: 'email',
+      required: true,
+      unique: true,
     },
-    username:{
-      type:'string',
-      required:true,
-      unique:true,
-      primaryKey: true,
+    username: {
+      type: 'string',
+      required: true,
+      unique: true,
     },
-    password:{
-      type:'string',
-      required:true,
+    password: {
+      type: 'string',
+      required: true,
     },
-    photo_url:{
-      type:'string'
+    photo_url: {
+      type: 'string'
     }
 
   },
@@ -49,12 +48,12 @@ module.exports = {
     Users.create({
       name: inputs.name,
       email: inputs.email,
-      username:inputs.username,
+      username: inputs.username,
       // TODO: But encrypt the password first
       password: inputs.password,
-      photo_url:inputs.photo_url,
+      photo_url: inputs.photo_url,
     })
-    .exec(cb);
+      .exec(cb);
   },
   /**
    * Create a new user using the provided inputs,
@@ -73,12 +72,12 @@ module.exports = {
     Users.create({
       name: inputs.name,
       email: inputs.email,
-      username:inputs.username,
+      username: inputs.username,
       // TODO: But encrypt the password first
       password: inputs.password,
-      photo_url:'sin_imagen',
+      photo_url: 'sin_imagen',
     })
-    .exec(cb);
+      .exec(cb);
   },
   /**
    * Create a new user using the provided inputs,
@@ -97,7 +96,7 @@ module.exports = {
     Users.findOne({
       email: inputs.email,
     })
-    .exec(cb);
+      .exec(cb);
   },
   /**
    * Create a new user using the provided inputs,
@@ -115,11 +114,16 @@ module.exports = {
     // Create a user
     Users.findOne({
       email: inputs.email,
-      password:inputs.password
+      password: inputs.password
     })
-    .exec(cb);
+      .exec(cb);
   },
-  
-  connection:'mongodb'
+
+  setPhoto: function (inputs, cb) {
+    console.log(inputs)
+    Users.update(inputs.id, { photo_url: inputs.photo_url }).exec(cb);
+  },
+
+  connection: 'mongodb'
 };
 

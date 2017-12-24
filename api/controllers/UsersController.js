@@ -28,51 +28,75 @@ module.exports = {
         Users.isuser({
             email: req.param('email'),
         }, function (err, user) {
-            if (err || user==null)
+            if (err || user == null)
                 return res.json({ res: 'error', detail: err });
             return res.json({ res: 'ok', user: user });
         });
     },
-    signup: function (req, res){
+    signup: function (req, res) {
         Users.signup({
             name: req.param('name'),
             email: req.param('email'),
             username: req.param('username'),
             password: req.param('password')
         }, function (err, user) {
-            if(err)
+            if (err)
                 return res.negotiate(err)
-            req.session.me=user.id
+            req.session.me = user.id
             return res.redirect('/')
         })
     },
 
-    signin: function (req, res){
+    signin: function (req, res) {
         Users.signin({
             email: req.param('email'),
             password: req.param('password')
-        }, function (err , user){
-            if(err || user == null)
+        }, function (err, user) {
+            if (err || user == null)
                 return res.negotiate(err)
             req.session.me=user.id
             return res.view('home',{user:user})
         })
     },
-    signin_ws:function(req,res){
+    signin_ws: function (req, res) {
         Users.signin({
-            email:req.param('email'),
-            password:req.param('password')
-        },function(err,user){
-            if (err || user==null)
+            email: req.param('email'),
+            password: req.param('password')
+        }, function (err, user) {
+            if (err || user == null)
                 return res.json({ res: 'error', detail: err });
             return res.json({ res: 'ok', user: user });
         })
     },
-    /*validarLogeo: function (req, res){
-        if(req.session.me != null)
-            return res.redirect('/home')
-        return res.redirect('/')
-    }*/
+
+    uploadFile: function (req, res) {
+        req.file('picture').upload({
+            adapter: require('skipper-better-s3')
+            , key: 'AKIAIHQ5O7BDIQ733FLA'
+            , secret: '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'
+            , bucket: 'gn8images' // Optional - default is 'us-standard' 
+            // Let's use the custom s3params to upload this file as publicly 
+            // readable by anyone 
+            , s3params:
+                { ACL: 'public-read' }
+        }, function (err, filesUploaded) {
+            if (err) return res.negotiate(err);
+
+            Users.setPhoto({
+                id:req.session.me,
+                photo_url: filesUploaded[0].extra.Location
+            }, function (err, user) {
+                if (err) return res.negotiate(err);
+
+                return res.ok({
+                    files: filesUploaded,
+                    textParams: user
+                });
+            })
+
+        });
+    }
+
 
 };
 

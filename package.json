@@ -23,7 +23,9 @@
     "rc": "1.0.1",
     "sails": "~0.12.14",
     "sails-disk": "~0.10.9",
-    "sails-mongo": "^0.12.2"
+    "sails-mongo": "^0.12.2",
+    "skipper-better-s3": "^2.2.1",
+    "skipper-s3": "^0.5.9"
   },
   "scripts": {
     "debug": "node debug app.js",
