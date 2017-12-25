@@ -54,8 +54,8 @@ module.exports = {
         }, function (err, user) {
             if (err || user == null)
                 return res.negotiate(err)
-            req.session.me=user.id
-            return res.view('home',{user:user})
+            req.session.me = user.id
+            return res.view('home', { user: user })
         })
     },
     signin_ws: function (req, res) {
@@ -119,6 +119,17 @@ module.exports = {
             })
 
         });
+    },
+    updateUser_ws: function (req, res) {
+        Users.update(req.param('id'),
+            {
+                name: req.param('name'),
+            })
+            .exec(function (err, user) {
+                if (err || user == null)
+                    return res.json({ res: 'error', detail: err });
+                return res.json({ res: 'ok', user: user[0] });
+            })
     },
 
 
