@@ -28,6 +28,18 @@ module.exports = {
     },
     photo_url: {
       type: 'string'
+    },
+    es_empresa: {
+      type: 'string'
+    },
+    direccion: {
+      type: 'string'
+    },
+    telefono: {
+      type: 'string'
+    },
+    likes:{
+      type:'integer'
     }
 
   },
@@ -43,7 +55,7 @@ module.exports = {
    * @param  {Function} cb
    */
 
-  signup_ws: function (inputs, cb) {
+  signup: function (inputs, cb) {
     // Create a user
     Users.create({
       name: inputs.name,
@@ -67,17 +79,35 @@ module.exports = {
    * @param  {Function} cb
    */
 
-  signup: function (inputs, cb) {
+  signup_ws: function (inputs, cb) {
     // Create a user
-    Users.create({
-      name: inputs.name,
-      email: inputs.email,
-      username: inputs.username,
-      // TODO: But encrypt the password first
-      password: inputs.password,
-      photo_url: 'sin_imagen',
-    })
-      .exec(cb);
+    if (inputs.es_empresa == "NO") {
+      Users.create({
+        name: inputs.name,
+        email: inputs.email,
+        username: inputs.username,
+        // TODO: But encrypt the password first
+        password: inputs.password,
+        photo_url: inputs.photo_url,
+        es_empresa:'NO',
+        likes:0
+      })
+        .exec(cb);
+    } else {
+      Users.create({
+        name: inputs.name,
+        email: inputs.email,
+        username: inputs.username,
+        // TODO: But encrypt the password first
+        password: inputs.password,
+        photo_url: inputs.photo_url,
+        es_empresa:'SI',
+        direccion:inputs.direccion,
+        telefono:inputs.telefono,
+        likes:0
+      })
+        .exec(cb);
+    }
   },
   /**
    * Create a new user using the provided inputs,

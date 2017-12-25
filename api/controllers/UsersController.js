@@ -15,11 +15,43 @@ module.exports = {
             email: req.param('email'),
             username: req.param('username'),
             password: req.param('password'),
-            photo_url: req.param('photo_url')
+            photo_url: req.param('photo_url'),
+            es_empresa: req.param('es_empresa'),
         }, function (err, user) {
             if (err)
                 return res.json({ res: 'error', detail: err });
             return res.json({ res: 'ok', user: user });
+        });
+    },
+    signupEmpresa_ws: function (req, res) {
+        req.file('photo_url').upload({
+            adapter: require('skipper-better-s3')
+            , key: 'AKIAIHQ5O7BDIQ733FLA'
+            , secret: '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'
+            , bucket: 'gn8images' // Optional - default is 'us-standard' 
+            // Let's use the custom s3params to upload this file as publicly 
+            // readable by anyone 
+            , s3params:
+                { ACL: 'public-read' }
+        }, function (err, filesUploaded) {
+            if (err) return res.json({ res: 'error', detail: err });
+
+            Users.signup_ws({
+                name: req.param('name'),
+                email: req.param('email'),
+                username: req.param('username'),
+                password: req.param('password'),
+                photo_url: filesUploaded[0].extra.Location,
+                es_empresa: 'SI',
+                direccion:req.param('direccion'),
+                telefono:req.param('telefono'),
+    
+            }, function (err, user) {
+                if (err)
+                    return res.json({ res: 'error', detail: err });
+                return res.json({ res: 'ok', user: user });
+            });
+
         });
     },
     is_user_ws: function (req, res) {
@@ -131,6 +163,16 @@ module.exports = {
                 return res.json({ res: 'ok', user: user[0] });
             })
     },
+    listaEmpresas_ws:function(req,res){
+        Users.find({
+            es_empresa: "SI",
+          })
+            .exec(function (err, empresas) {
+                if (err || empresas == null)
+                    return res.json({ res: 'error', detail: err });
+                return res.json({ res: 'ok', empresas:empresas  });
+            })
+    }
 
 
 };
