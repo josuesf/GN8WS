@@ -1,0 +1,46 @@
+<!DOCTYPE html>  
+<html>  
+  <head>
+    <title>Mensajes realtime</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <p>Envía un mensaje:</p>
+    <input type="text" id="send" placeholder="Mensaje...">
+    <button id="button">Enviar</button>
+
+    <ul id="mensajes"></ul>
+
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script>
+      var mensajes = document.querySelector('#mensajes');
+      var button = document.querySelector('#button');
+      var input = document.querySelector('#send');
+
+      function addMessage(content) {
+        mensajes.innerHTML = '<li>' + content + '</li>' + mensajes.innerHTML;
+      }
+
+      io.socket.get('/message', function(data, response) {
+        data.forEach(function(value) {
+          addMessage(value.content);
+        });
+      });
+
+      button.addEventListener('click', function(e) {
+        var data = {
+          content: input.value
+        }
+        io.socket.post('/message', data, function(data, response) {
+          input.value = null;
+        });
+      });
+
+      io.socket.on('message', function(response){
+        if (response.verb === 'created') {
+          addMessage(response.data.content);
+        }
+      });
+    </script>
+  </body>
+</html>  

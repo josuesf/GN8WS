@@ -1,0 +1,39 @@
+{
+  "data": {
+    "message": [
+      {
+        "content": "Hola",
+        "createdAt": "2017-12-26T19:39:03.496Z",
+        "updatedAt": "2017-12-26T19:39:03.496Z",
+        "id": 1
+      },
+      {
+        "content": "Que tal",
+        "createdAt": "2017-12-26T19:39:12.699Z",
+        "updatedAt": "2017-12-26T19:39:12.699Z",
+        "id": 2
+      }
+    ]
+  },
+  "schema": {
+    "message": {
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "message": {
+      "id": 2
+    }
+  }
+}
