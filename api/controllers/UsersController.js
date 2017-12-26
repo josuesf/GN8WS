@@ -131,8 +131,8 @@ module.exports = {
     uploadPhotoUser: function (req, res) {
         req.file('picture').upload({
             adapter: require('skipper-better-s3')
-            , key: 'AKIAIHQ5O7BDIQ733FLA'
-            , secret: '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'
+            , key: 'AKIAJXJ4AWFL27RKUNDQ'
+            , secret: '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'
             , bucket: 'gn8images' // Optional - default is 'us-standard' 
             // Let's use the custom s3params to upload this file as publicly 
             // readable by anyone 
