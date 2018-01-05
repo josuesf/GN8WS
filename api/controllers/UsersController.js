@@ -26,8 +26,8 @@ module.exports = {
     signupEmpresa_ws: function (req, res) {
         req.file('photo_url').upload({
             adapter: require('skipper-better-s3')
-            , key: 'AKIAIL6JNXZN4NL3QH6Q'
-            , secret: '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'
+            , key: process.env.S3_KEY
+            , secret: process.env.S3_SECRET
             , bucket: 'gn8images' // Optional - default is 'us-standard' 
             // Let's use the custom s3params to upload this file as publicly 
             // readable by anyone 
