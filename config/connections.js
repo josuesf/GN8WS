@@ -61,7 +61,7 @@ module.exports.connections = {
     host: 'ds157653.mlab.com',
     port: 57653,
     user: 'gn8user', //optional
-    password: '#goodNight', //optional
+    password: 'goodNight', //optional
     database: 'gn8db' //optional
   },
 
