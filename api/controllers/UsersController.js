@@ -15,7 +15,7 @@ module.exports = {
             email: req.param('email'),
             username: req.param('username'),
             password: req.param('password'),
-            photo_facebook: req.param('photo_facebook'),
+            photo_url: req.param('photo_url'),
             es_empresa: req.param('es_empresa'),
         }, function (err, user) {
             if (err)
